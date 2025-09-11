@@ -27,7 +27,7 @@
 	let maxConn = $state<number | undefined>(undefined);
 
 	const osOptions = ['linux', 'macos', 'windows'];
-	const storageOptions = ['sdd', 'hdd', 'network'];
+	const storageOptions = ['ssd', 'hdd', 'network'];
 	const backupOptions = ['pg_dump', 'pg_basebackup', 'pglogical'];
 	const workloadOptions = ['webapp', 'oltp', 'warehouse', 'desktop', 'mixed'];
 
