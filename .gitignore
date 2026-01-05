@@ -26,3 +26,11 @@ vite.config.ts.timestamp-*
 
 # Paraglide
 src/lib/paraglide
+
+# AI Stuff
+AGENTS.md
+CLAUDE.md
+PROMPTS.md
+GENERATED_*.md
+.claude/
+.serena/

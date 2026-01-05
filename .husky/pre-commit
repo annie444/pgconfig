@@ -1,0 +1,7 @@
+pnpm check
+git update-index --again
+pnpm format
+git update-index --again
+pnpm test
+
+# vim: set ft=bash:

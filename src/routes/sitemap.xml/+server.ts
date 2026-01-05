@@ -1,26 +1,26 @@
 import { SITE_URL, LAST_MOD_DATE } from '$lib/consts';
-import { LastModDate, dateToString } from '$lib/utils';
+import { dateToString } from '$lib/utils';
 
 function create_entry(
-  path: string,
-  lastmod: Date | LastModDate | string | null = null,
-  changefreq:
-    | 'always'
-    | 'hourly'
-    | 'daily'
-    | 'weekly'
-    | 'monthly'
-    | 'yearly'
-    | 'never'
-    | null = null,
-  priority: number | null = null
+	path: string,
+	lastmod: Date | string | null = null,
+	changefreq:
+		| 'always'
+		| 'hourly'
+		| 'daily'
+		| 'weekly'
+		| 'monthly'
+		| 'yearly'
+		| 'never'
+		| null = null,
+	priority: number | null = null
 ) {
-  const changefreqValue = changefreq ? changefreq : 'monthly';
-  const priorityValue = (priority && priority <= 1.0 && priority >= 0.0 ? priority : 1.0).toFixed(
-    1
-  );
-  const lastmodValue = dateToString(lastmod ? lastmod : LAST_MOD_DATE);
-  return `<url>
+	const changefreqValue = changefreq ? changefreq : 'monthly';
+	const priorityValue = (priority && priority <= 1.0 && priority >= 0.0 ? priority : 1.0).toFixed(
+		1
+	);
+	const lastmodValue = dateToString(lastmod ? lastmod : LAST_MOD_DATE);
+	return `<url>
     <loc>${new URL(path, SITE_URL).href}</loc>
     <lastmod>${lastmodValue}</lastmod>
     <changefreq>${changefreqValue}</changefreq>
@@ -29,8 +29,8 @@ function create_entry(
 }
 
 export async function GET() {
-  return new Response(
-    `
+	return new Response(
+		`
 		<?xml version="1.0" encoding="UTF-8" ?>
 		<urlset
 			xmlns="https://www.sitemaps.org/schemas/sitemap/0.9"
@@ -42,11 +42,11 @@ export async function GET() {
 		>
 			${create_entry('/')}
 		</urlset>`.trim(),
-    {
-      headers: {
-        'Content-Type': 'application/xml',
-        'Cache-Control': 'max-age=0, s-maxage=3600'
-      }
-    }
-  );
+		{
+			headers: {
+				'Content-Type': 'application/xml',
+				'Cache-Control': 'max-age=0, s-maxage=3600'
+			}
+		}
+	);
 }
