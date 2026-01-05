@@ -1,7 +1,17 @@
-pnpm check
+pnpm exec svelte-kit sync || exit 1
 git update-index --again
-pnpm format
+
+# Update LAST_MOD_DATE in src/lib/consts.ts
+CONSTS_FILE="src/lib/consts.ts"
+if [ -f "$CONSTS_FILE" ]; then
+  NEW_DATE=$(date -Iseconds)
+  sed -i.bak "s/LAST_MOD_DATE = new Date('.*')/LAST_MOD_DATE = new Date('$NEW_DATE')/" "$CONSTS_FILE"
+  rm -f "$CONSTS_FILE.bak"
+  git add "$CONSTS_FILE"
+fi
+
+pnpm format:staged || exit 1
 git update-index --again
-pnpm test
+pnpm test || exit 1
 
 # vim: set ft=bash:

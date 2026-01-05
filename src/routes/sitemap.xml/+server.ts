@@ -1,7 +1,7 @@
 import { SITE_URL, LAST_MOD_DATE } from '$lib/consts';
 import { dateToString } from '$lib/utils';
 
-function create_entry(
+function createEntry(
 	path: string,
 	lastmod: Date | string | null = null,
 	changefreq:
@@ -40,7 +40,7 @@ export async function GET() {
 			xmlns:image="https://www.google.com/schemas/sitemap-image/1.1"
 			xmlns:video="https://www.google.com/schemas/sitemap-video/1.1"
 		>
-			${create_entry('/')}
+			${createEntry('/')}
 		</urlset>`.trim(),
 		{
 			headers: {

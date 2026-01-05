@@ -10,6 +10,7 @@
 		"prepare": "husky",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"format:staged": "prettier --write --ignore-unknown $(git diff --cached --name-only --diff-filter=ACMR | sed 's| |\\\\ |g')",
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint .",
 		"test:unit": "vitest",

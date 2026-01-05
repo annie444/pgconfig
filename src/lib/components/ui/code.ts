@@ -8,8 +8,8 @@ export const languages = { json, yaml, bash };
 export type Langs = keyof typeof languages;
 
 export interface Props extends Omit<Highlight, 'language' | 'code'> {
-  code: string;
-  lang: Langs;
-  class?: string;
-  title?: string;
+	code: string;
+	lang: Langs;
+	class?: string;
+	title?: string;
 }
