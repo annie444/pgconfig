@@ -1,3 +1,13 @@
+/**
+ * Schema for validating PostgreSQL configuration API inputs using Zod.
+ *
+ * This schema ensures that all required parameters are provided and conform
+ * to expected types and ranges. It is used to validate incoming requests to the
+ * configuration API.
+ *
+ * These are the direct inputs used to compute the PostgreSQL settings in ./config.ts
+ */
+
 import * as z from 'zod';
 
 export const pgApiSchema = z.object({
