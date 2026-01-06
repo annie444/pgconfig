@@ -1,11 +1,26 @@
 <script lang="ts">
 	import { getCoreRowModel } from '@tanstack/table-core';
-	import { createSvelteTable, FlexRender, Table } from '$lib/components/ui';
+	import { createSvelteTable, FlexRender, Table, Code } from '$lib/components/ui';
 	import { columns, queryParams } from '$lib/data/endpoint-docs';
 	import { SITE_URL } from '$lib/consts';
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
 	import { SvelteURL } from 'svelte/reactivity';
+
+	const jsonExample = JSON.stringify(
+		{
+			version: 17,
+			os: 'linux',
+			memory_gb: 8,
+			cpus: 8,
+			storage_type: 'ssd',
+			workload: 'webapp',
+			num_disks: 1,
+			db_size_gb: 10
+		},
+		null,
+		2
+	);
 
 	let canonicalUrl = $state(SITE_URL);
 
@@ -29,14 +44,24 @@
 	<h2 class="text-2xl font-bold">Endpoint</h2>
 	<div class="mt-4 rounded-xl border p-4">
 		<div class="font-mono text-base">
-			GET <span class="font-semibold">{canonicalUrl}<wbr />/api/v1/tune</span>
+			<span
+				class="rounded bg-green-100 px-1.5 py-0.5 text-green-800 dark:bg-green-900 dark:text-green-200"
+				>GET</span
+			>
+			<span class="mx-1 text-muted-foreground">|</span>
+			<span
+				class="rounded bg-blue-100 px-1.5 py-0.5 text-blue-800 dark:bg-blue-900 dark:text-blue-200"
+				>POST</span
+			>
+			<span class="ml-2 font-semibold">{canonicalUrl}<wbr />/api/v1/tune</span>
 		</div>
 		<p class="mt-2 text-base">
-			Returns recommended <span class="font-medium">postgresql.conf</span> settings based on the provided
-			server profile.
+			Returns recommended <span class="font-medium">postgresql.conf</span> settings based on the
+			provided server profile. Use <span class="font-medium">GET</span> with query parameters or
+			<span class="font-medium">POST</span> with a JSON body.
 		</p>
 
-		<h3 class="mt-6 font-semibold">Query parameters</h3>
+		<h3 class="mt-6 font-semibold">Parameters</h3>
 		<div class="mt-3 overflow-x-auto">
 			<Table.Root>
 				<Table.Header>
@@ -72,10 +97,19 @@
 				</Table.Body>
 			</Table.Root>
 		</div>
+
+		<h3 class="mt-6 font-semibold">Example JSON body (POST)</h3>
+		<div class="mt-3">
+			<Code code={jsonExample} lang="json" title="request.json" />
+		</div>
 	</div>
 	<div class="mt-4 rounded-xl border p-4">
 		<div class="font-mono text-base">
-			GET <span class="font-semibold">{canonicalUrl}<wbr />/api/v1/tune/schema.json</span>
+			<span
+				class="rounded bg-green-100 px-1.5 py-0.5 text-green-800 dark:bg-green-900 dark:text-green-200"
+				>GET</span
+			>
+			<span class="ml-2 font-semibold">{canonicalUrl}<wbr />/api/v1/tune/schema.json</span>
 		</div>
 		<p class="mt-2 text-base">
 			Returns the JSON Schema for the request parameters and response of the <code>/v1/tune</code> endpoint.
